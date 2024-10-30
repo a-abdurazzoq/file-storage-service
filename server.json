@@ -1,0 +1,12 @@
+{
+  "name"             : "file-storage-service",
+  "script"           : "build/index.js",
+  "node_args"        : "--harmony",
+  "out_file"         : "/home/logs/file-storage-service/file-storage-service.log",
+  "error_file"       : "/home/logs/file-storage-service/file-storage-service_error.log",
+  "interpreter"      : "node@18.20.4",
+  "autorestart"      : true,
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

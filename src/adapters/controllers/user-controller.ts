@@ -93,6 +93,7 @@ export class UserControllerImpl implements UserController {
 
 	public async signUp(req: Request<any, any, SignUpUserUsecaseParams>, res: Response, next: NextFunction): Promise<void> {
 		const pairTokens = await this.signUpUserUsecase.execute({
+			id: req.body.id,
 			password: req.body.password,
 		});
 

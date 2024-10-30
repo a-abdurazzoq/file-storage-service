@@ -6,10 +6,10 @@ import { FileStorageSymbols, RepositorySymbols } from "../../infrastructure/depe
 import { FileStorage } from "../../infrastructure/file-storage";
 
 export interface FileService {
-	deleteFile(fileId: number, userId: number): Promise<void>;
-	getFilePath(fileId: number, userId: number): Promise<string>;
-	getAllFiles(userId: number, params: FileServiceGetAllParams): Promise<File[]>;
-	getFileInfo(fileId: number, userId: number): Promise<File>;
+	deleteFile(fileId: number, userId: string): Promise<void>;
+	getFilePath(fileId: number, userId: string): Promise<string>;
+	getAllFiles(userId: string, params: FileServiceGetAllParams): Promise<File[]>;
+	getFileInfo(fileId: number, userId: string): Promise<File>;
 	uploadFile(params: FileServiceUploadFileParams): Promise<File>;
 	updateFile(params: FileServiceUpdateFileParams, updateData: FileServiceUpdateFileData): Promise<File>;
 }
@@ -22,12 +22,12 @@ export type FileServiceUploadFileParams = {
 	extension: string;
 	mimeType: string;
 	size: number
-	userId: number;
+	userId: string;
 }
 
 export type FileServiceUpdateFileParams = {
 	fileId: number
-	userId: number;
+	userId: string;
 }
 
 export type FileServiceUpdateFileData = {
@@ -77,7 +77,7 @@ export class FileServiceImpl implements FileService {
 		return updatedFile;
 	}
 
-	public async deleteFile(fileId: number, userId: number): Promise<void> {
+	public async deleteFile(fileId: number, userId: string): Promise<void> {
 		const file = await this.getByIdAndUserId(fileId, userId)
 
 		await Promise.all([
@@ -86,21 +86,21 @@ export class FileServiceImpl implements FileService {
 		]);
 	}
 
-	public async getFileInfo(fileId: number, userId: number): Promise<File> {
+	public async getFileInfo(fileId: number, userId: string): Promise<File> {
 		return await this.getByIdAndUserId(fileId, userId);
 	}
 
-	public async getFilePath(fileId: number, userId: number): Promise<string> {
+	public async getFilePath(fileId: number, userId: string): Promise<string> {
 		const file = await this.getByIdAndUserId(fileId, userId);
 
 		return this.fileStorage.getFilePath(file.filename);
 	}
 
-	public async getAllFiles(userId: number, params: FileServiceGetAllParams): Promise<File[]> {
+	public async getAllFiles(userId: string, params: FileServiceGetAllParams): Promise<File[]> {
 		return this.fileRepository.getAllByUserId(userId, params);
 	}
 
-	private async getByIdAndUserId(fileId: number, userId: number): Promise<File> {
+	private async getByIdAndUserId(fileId: number, userId: string): Promise<File> {
 		const file = await this.fileRepository.getById(fileId);
 
 		if (file.userId !== userId) {

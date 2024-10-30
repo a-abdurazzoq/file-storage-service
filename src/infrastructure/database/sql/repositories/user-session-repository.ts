@@ -3,7 +3,7 @@ import {
 	UserSession,
 	UserSessionException,
 	UserSessionFactory,
-	UserSessionRepository,
+	UserSessionRepository, UserSessionStruct,
 } from "../../../../domain/user-session";
 import { Database } from "../../database";
 import { UserSession as UserSessionModel } from "@prisma/client";
@@ -18,7 +18,7 @@ export class UserSessionRepositoryImpl implements UserSessionRepository {
 		private readonly factory: UserSessionFactory,
 	) {}
 
-	public async create(userSession: UserSessionModel): Promise<UserSession> {
+	public async create(userSession: UserSessionStruct): Promise<UserSession> {
 		const createdSession = await this.database.userSession.create({
 			data: {
 				userId: userSession.userId,
@@ -42,7 +42,7 @@ export class UserSessionRepositoryImpl implements UserSessionRepository {
 		return this.toEntity(userSession);
 	}
 
-	public async getByUserIdAndDeviceId(userId: number, deviceId: string): Promise<UserSession | null> {
+	public async getByUserIdAndDeviceId(userId: string, deviceId: string): Promise<UserSession | null> {
 		const userSession = await this.database.userSession.findFirst({
 			where: {
 				userId: userId,

@@ -56,7 +56,7 @@ export class FileRepositoryImpl implements FileRepository {
 		return this.toEntity(file);
 	}
 
-	public async getAllByUserId(userId: number, filter: FileRepositoryGetAllFileFilter): Promise<File[]> {
+	public async getAllByUserId(userId: string, filter: FileRepositoryGetAllFileFilter): Promise<File[]> {
 		const page = filter.page || 1;
 		const limit = filter.limit || 10;
 		const skip = (page - 1) * limit;

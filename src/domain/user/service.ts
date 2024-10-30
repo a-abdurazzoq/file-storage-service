@@ -1,6 +1,6 @@
 import { User } from './entity';
 import { inject, injectable } from "inversify";
-import { UserRepository } from "./repository";
+import { UserRepository, UserRepositoryCreateParams } from "./repository";
 import { compare, hash } from "bcryptjs";
 import { UserException } from "./exception";
 import { UserConfig } from "../../config";
@@ -8,17 +8,15 @@ import { ConfigSymbols, RepositorySymbols } from "../../infrastructure/dependenc
 
 export interface UserService {
 	create(params: UserServiceCreateParams): Promise<User>;
-	getById(userId: number): Promise<User>;
+	getById(userId: string): Promise<User>;
 	comparePassword(inputPassword: string, user: User): Promise<boolean>;
 	updatePassword(params: UserServiceUpdatePasswordParams): Promise<void>;
 }
 
-export type UserServiceCreateParams = {
-	password: string;
-}
+export type UserServiceCreateParams = UserRepositoryCreateParams;
 
 export type UserServiceUpdatePasswordParams = {
-	id: number;
+	userId: string;
 	oldPassword: string;
 	newPassword: string;
 }
@@ -36,10 +34,13 @@ export class UserServiceImpl implements UserService {
 	public async create(params: UserServiceCreateParams): Promise<User> {
 		const hashedPassword = await hash(params.password, this.userConfig.getPasswordSaltLength());
 
-		return await this.userRepository.create({ password: hashedPassword });
+		return await this.userRepository.create({
+			id: params.id,
+			password: hashedPassword
+		});
 	}
 
-	public async getById(userId: number): Promise<User> {
+	public async getById(userId: string): Promise<User> {
 		return this.userRepository.getById(userId);
 	}
 
@@ -48,7 +49,7 @@ export class UserServiceImpl implements UserService {
 	}
 
 	public async updatePassword(params: UserServiceUpdatePasswordParams): Promise<void> {
-		const user = await this.userRepository.getById(params.id);
+		const user = await this.userRepository.getById(params.userId);
 
 		const isOldPasswordCorrect = await this.comparePassword(params.oldPassword, user);
 		if (!isOldPasswordCorrect) {
@@ -57,6 +58,6 @@ export class UserServiceImpl implements UserService {
 
 		const hashedNewPassword = await hash(params.newPassword, this.userConfig.getPasswordSaltLength());
 
-		await this.userRepository.updatePassword(params.id, hashedNewPassword);
+		await this.userRepository.updatePassword(params.userId, hashedNewPassword);
 	}
 }
