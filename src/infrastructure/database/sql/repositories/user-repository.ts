@@ -22,7 +22,6 @@ export class UserRepositoryImpl implements UserRepository {
 	async create(params: UserRepositoryCreateParams): Promise<User> {
 		const user = await this.database.user.create({
 			data: {
-				id: params.id,
 				password: params.password,
 			},
 		});
@@ -30,8 +29,8 @@ export class UserRepositoryImpl implements UserRepository {
 		return this.toEntity(user);
 	}
 
-	async getById(userId: string): Promise<User> {
-		const user = await this.database.user.findUnique({
+	async getById(userId: number): Promise<User> {
+		const user = await this.database.user.findFirst({
 			where: { id: userId },
 		});
 
@@ -42,7 +41,7 @@ export class UserRepositoryImpl implements UserRepository {
 		return this.toEntity(user);
 	}
 
-	async updatePassword(userId: string, newPassword: string): Promise<void> {
+	async updatePassword(userId: number, newPassword: string): Promise<void> {
 		await this.database.user.update({
 			where: { id: userId },
 			data: { password: newPassword, updatedAt: new Date() },

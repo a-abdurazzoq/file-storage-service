@@ -31,8 +31,8 @@ export class UserSessionRepositoryImpl implements UserSessionRepository {
 	}
 
 	public async get(refreshToken: string): Promise<UserSession> {
-		const userSession = await this.database.userSession.findUnique({
-			where: { refreshToken },
+		const userSession = await this.database.userSession.findFirst({
+			where: { refreshToken: refreshToken },
 		});
 
 		if (!userSession) {
@@ -42,7 +42,7 @@ export class UserSessionRepositoryImpl implements UserSessionRepository {
 		return this.toEntity(userSession);
 	}
 
-	public async getByUserIdAndDeviceId(userId: string, deviceId: string): Promise<UserSession | null> {
+	public async getByUserIdAndDeviceId(userId: number, deviceId: string): Promise<UserSession | null> {
 		const userSession = await this.database.userSession.findFirst({
 			where: {
 				userId: userId,

@@ -6,7 +6,7 @@ export interface UserFactory {
 }
 
 export type UserStruct = {
-	id: string;
+	id: number;
 	password: string;
 	createdAt: Date;
 	updatedAt: Date;

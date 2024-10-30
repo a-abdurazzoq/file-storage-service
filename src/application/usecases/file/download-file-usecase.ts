@@ -8,7 +8,7 @@ export interface DownloadFileUsecase {
 
 export type DownloadFileUsecaseParams = {
 	fileId: number;
-	userId: string;
+	userId: number;
 }
 
 @injectable()

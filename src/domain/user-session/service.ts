@@ -1,3 +1,4 @@
+import * as crypto from "node:crypto";
 import { UserSession } from "./entity";
 import { User } from "../user";
 import { inject, injectable } from "inversify";

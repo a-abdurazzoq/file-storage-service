@@ -6,7 +6,7 @@ export interface UserSessionFactory {
 }
 
 export type UserSessionStruct = {
-	userId: string;
+	userId: number;
 	deviceId: string;
 	refreshToken: string;
 }

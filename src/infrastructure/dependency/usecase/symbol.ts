@@ -15,5 +15,6 @@ export const UsecaseSymbols = {
 	},
 	UserSession: {
 		Update: Symbol.for("UpdateUserSessionUsecase"),
+		GetByAccessToken: Symbol.for("GetByAccessTokenUserSessionUsecase"),
 	},
 }

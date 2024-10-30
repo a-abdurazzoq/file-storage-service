@@ -4,7 +4,7 @@ import { ServiceSymbols } from "../../../infrastructure/dependency";
 
 export type DeleteFileUsecaseParams = {
 	fileId: number;
-	userId: string;
+	userId: number;
 }
 
 export interface DeleteFileUsecase {

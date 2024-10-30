@@ -43,7 +43,6 @@ export class ExpressServerImpl implements Server {
 
 	private init(): void {
 		this.express = express();
-
 		this.setMiddleware();
 		this.setRouters();
 		this.setListen();

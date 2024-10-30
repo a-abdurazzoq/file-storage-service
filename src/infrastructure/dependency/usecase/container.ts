@@ -6,7 +6,7 @@ import {
 	DownloadFileUsecase,
 	DownloadFileUsecaseImpl,
 	GetAllFileUsecase,
-	GetAllFileUsecaseImpl,
+	GetAllFileUsecaseImpl, GetByAccessTokenUserSessionUsecase, GetByAccessTokenUserSessionUsecaseImpl,
 	GetInfoUserUsecase,
 	GetInfoUserUsecaseImpl,
 	GetOneFileUsecase,
@@ -37,4 +37,5 @@ export const UsecaseContainerModule = new ContainerModule(bind => {
 	bind<SignInUserUsecase>(UsecaseSymbols.User.SignIn).to(SignInUserUsecaseImpl).inSingletonScope()
 	bind<SignUpUserUsecase>(UsecaseSymbols.User.SignUp).to(SignUpUserUsecaseImpl).inSingletonScope()
 	bind<UpdateUserSessionUsecase>(UsecaseSymbols.UserSession.Update).to(UpdateUserSessionUsecaseImpl).inSingletonScope()
+	bind<GetByAccessTokenUserSessionUsecase>(UsecaseSymbols.UserSession.GetByAccessToken).to(GetByAccessTokenUserSessionUsecaseImpl).inSingletonScope()
 })

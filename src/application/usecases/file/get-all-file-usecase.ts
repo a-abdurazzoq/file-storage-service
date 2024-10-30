@@ -7,7 +7,7 @@ export interface GetAllFileUsecase {
 }
 
 export type GetAllFileUsecaseParams = FileServiceGetAllParams & {
-	userId: string;
+	userId: number;
 }
 
 @injectable()

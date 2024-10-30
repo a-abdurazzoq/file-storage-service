@@ -17,18 +17,17 @@ export class UserRouterImpl implements RouterBase {
 
     public init(router: Router): void {
         router.post(
-            "./signin",
+            "/signin",
             this.userController.signIn.bind(this.userController),
         );
 
         router.post(
-            "./signin/new_token",
-            this.authRequiredMiddleware.execute.bind(this.authRequiredMiddleware),
+            "/signin/new_token",
             this.userController.refreshAccessToken.bind(this.userController),
         );
 
         router.post(
-            "./signup",
+            "/signup",
             this.userController.signUp.bind(this.userController),
         );
 

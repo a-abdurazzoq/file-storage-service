@@ -1,12 +1,12 @@
 export class User {
 	constructor(
-		private readonly _id: string,
+		private readonly _id: number,
 		private _password: string,
 		private readonly _createdAt: Date,
 		private readonly _updatedAt: Date,
 	) {}
 
-	public get id(): string {
+	public get id(): number {
 		return this._id;
 	}
 

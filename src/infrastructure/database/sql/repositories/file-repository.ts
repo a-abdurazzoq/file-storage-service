@@ -42,12 +42,12 @@ export class FileRepositoryImpl implements FileRepository {
 		return this.toEntity(updatedFile);
 	}
 
-	public async deleteById(id: number): Promise<void> {
-		await this.database.file.delete({ where: { id } });
+	public async deleteById(fileId: number): Promise<void> {
+		await this.database.file.delete({ where: { id: fileId } });
 	}
 
 	public async getById(fileId: number): Promise<File> {
-		const file = await this.database.file.findUnique({ where: { id: fileId } });
+		const file = await this.database.file.findFirst({ where: { id: fileId } });
 
 		if(!file) {
 			throw FileException.NotFoundById(fileId)
@@ -56,7 +56,7 @@ export class FileRepositoryImpl implements FileRepository {
 		return this.toEntity(file);
 	}
 
-	public async getAllByUserId(userId: string, filter: FileRepositoryGetAllFileFilter): Promise<File[]> {
+	public async getAllByUserId(userId: number, filter: FileRepositoryGetAllFileFilter): Promise<File[]> {
 		const page = filter.page || 1;
 		const limit = filter.limit || 10;
 		const skip = (page - 1) * limit;

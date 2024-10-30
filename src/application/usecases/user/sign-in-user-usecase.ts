@@ -11,7 +11,7 @@ export interface SignInUserUsecase {
 }
 
 export type SignInUserUsecaseParams = {
-	userId: string;
+	userId: number;
 	inputPassword: string;
 };
 export type SignInUserUsecaseResult = UserSessionServiceRefreshAccessTokenResult;

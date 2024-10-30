@@ -8,7 +8,7 @@ export interface GetOneFileUsecase {
 
 export interface GetOneFileUsecaseParams {
 	fileId: number;
-	userId: string;
+	userId: number;
 }
 
 @injectable()

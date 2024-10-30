@@ -7,7 +7,7 @@ export interface GetInfoUserUsecase {
 }
 
 export type GetInfoUserUsecaseParams = {
-	userId: string;
+	userId: number;
 };
 
 @injectable()

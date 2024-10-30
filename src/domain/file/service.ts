@@ -6,10 +6,10 @@ import { FileStorageSymbols, RepositorySymbols } from "../../infrastructure/depe
 import { FileStorage } from "../../infrastructure/file-storage";
 
 export interface FileService {
-	deleteFile(fileId: number, userId: string): Promise<void>;
-	getFilePath(fileId: number, userId: string): Promise<string>;
-	getAllFiles(userId: string, params: FileServiceGetAllParams): Promise<File[]>;
-	getFileInfo(fileId: number, userId: string): Promise<File>;
+	deleteFile(fileId: number, userId: number): Promise<void>;
+	getFilePath(fileId: number, userId: number): Promise<string>;
+	getAllFiles(userId: number, params: FileServiceGetAllParams): Promise<File[]>;
+	getFileInfo(fileId: number, userId: number): Promise<File>;
 	uploadFile(params: FileServiceUploadFileParams): Promise<File>;
 	updateFile(params: FileServiceUpdateFileParams, updateData: FileServiceUpdateFileData): Promise<File>;
 }
@@ -22,12 +22,12 @@ export type FileServiceUploadFileParams = {
 	extension: string;
 	mimeType: string;
 	size: number
-	userId: string;
+	userId: number;
 }
 
 export type FileServiceUpdateFileParams = {
 	fileId: number
-	userId: string;
+	userId: number;
 }
 
 export type FileServiceUpdateFileData = {
@@ -49,35 +49,30 @@ export class FileServiceImpl implements FileService {
 	) {}
 
 	public async uploadFile(params: FileServiceUploadFileParams): Promise<File> {
-		const newFile = await this.fileRepository.create({
-			filename: params.filename,
+		const filename = await this.fileStorage.saveFile(params.filename, params.content);
+
+		return await this.fileRepository.create({
+			filename: filename,
 			extension: params.extension,
 			mimeType: params.mimeType,
 			size: params.size,
 			userId: params.userId,
 		});
-
-		await this.fileStorage.saveFile(newFile.filename, params.content);
-
-		return newFile;
 	}
 
 	public async updateFile(params: FileServiceUpdateFileParams, updatedData: FileServiceUpdateFileData): Promise<File> {
 		const file = await this.getByIdAndUserId(params.fileId, params.userId)
+		await this.fileStorage.deleteFile(file.filename);
 
-		file.filename = updatedData.filename;
+		file.filename = await this.fileStorage.saveFile(updatedData.filename, updatedData.content);
 		file.extension = updatedData.extension;
 		file.mimeType = updatedData.mimeType;
 		file.size = updatedData.size;
 
-		const updatedFile = await this.fileRepository.updateById(params.fileId, file);
-
-		await this.fileStorage.updateFile(file.filename, updatedData.content);
-
-		return updatedFile;
+		return await this.fileRepository.updateById(params.fileId, file);
 	}
 
-	public async deleteFile(fileId: number, userId: string): Promise<void> {
+	public async deleteFile(fileId: number, userId: number): Promise<void> {
 		const file = await this.getByIdAndUserId(fileId, userId)
 
 		await Promise.all([
@@ -86,21 +81,21 @@ export class FileServiceImpl implements FileService {
 		]);
 	}
 
-	public async getFileInfo(fileId: number, userId: string): Promise<File> {
+	public async getFileInfo(fileId: number, userId: number): Promise<File> {
 		return await this.getByIdAndUserId(fileId, userId);
 	}
 
-	public async getFilePath(fileId: number, userId: string): Promise<string> {
+	public async getFilePath(fileId: number, userId: number): Promise<string> {
 		const file = await this.getByIdAndUserId(fileId, userId);
 
 		return this.fileStorage.getFilePath(file.filename);
 	}
 
-	public async getAllFiles(userId: string, params: FileServiceGetAllParams): Promise<File[]> {
+	public async getAllFiles(userId: number, params: FileServiceGetAllParams): Promise<File[]> {
 		return this.fileRepository.getAllByUserId(userId, params);
 	}
 
-	private async getByIdAndUserId(fileId: number, userId: string): Promise<File> {
+	private async getByIdAndUserId(fileId: number, userId: number): Promise<File> {
 		const file = await this.fileRepository.getById(fileId);
 
 		if (file.userId !== userId) {
