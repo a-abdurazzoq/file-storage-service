@@ -1,7 +1,7 @@
 export class File {
 	constructor(
 		private readonly _id: number,
-		private readonly _userId: number,
+		private readonly _userId: string,
 		private _filename: string,
 		private _extension: string,
 		private _mimeType: string,
@@ -13,7 +13,7 @@ export class File {
 		return this._id;
 	}
 
-	public get userId(): number {
+	public get userId(): string {
 		return this._userId;
 	}
 

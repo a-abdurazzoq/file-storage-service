@@ -7,7 +7,7 @@ export interface FileFactory {
 
 export type FileStruct = {
 	id: number
-	userId: number
+	userId: string
 	filename: string
 	extension: string
 	mimeType: string

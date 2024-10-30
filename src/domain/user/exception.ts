@@ -4,7 +4,7 @@ export class UserException extends Error {
 		this.name = 'UserException';
 	}
 
-	static NotFoundById(userId: number): UserException {
+	static NotFoundById(userId: string): UserException {
 		return UserException.create(`User not found by id: ${userId}`);
 	}
 

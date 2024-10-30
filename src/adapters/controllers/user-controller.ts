@@ -18,7 +18,7 @@ import { UserSessionException } from "../../domain/user-session";
 export interface UserController {
 	info(req: Request<any, any, GetInfoUserUsecaseParams>, res: Response, next: NextFunction): Promise<void>;
 	refreshAccessToken(req: Request<any, any, UpdateUserSessionUsecaseParams>, res: Response, next: NextFunction): Promise<void>;
-	signIn(req: Request<any, any, { id: number; password: string }>, res: Response, next: NextFunction): Promise<void>;
+	signIn(req: Request<any, any, { id: string; password: string }>, res: Response, next: NextFunction): Promise<void>;
 	signUp(req: Request<any, any, SignUpUserUsecaseParams>, res: Response, next: NextFunction): Promise<void>;
 	logout(req: Request<any, any, LogoutUserUsecaseParams>, res: Response, next: NextFunction): Promise<void>;
 }
@@ -97,7 +97,7 @@ export class UserControllerImpl implements UserController {
 		}
 	}
 
-	public async signIn(req: Request<any, any, { id: number; password: string }>, res: Response, next: NextFunction): Promise<void> {
+	public async signIn(req: Request<any, any, { id: string; password: string }>, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const pairTokens = await this.signInUserUsecase.execute({
 				userId: req.body.id,

@@ -1,11 +1,11 @@
 export class UserSession {
 	constructor(
-		private readonly _userId: number,
+		private readonly _userId: string,
 		private readonly _deviceId: string,
 		private readonly _refreshToken: string,
 	) {}
 
-	public get userId(): number {
+	public get userId(): string {
 		return this._userId;
 	}
 

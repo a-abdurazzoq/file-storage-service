@@ -3,7 +3,7 @@ import { File } from './entity';
 export interface FileRepository {
 	create(params: FileRepositoryCreateParams): Promise<File>;
 	getById(fileId: number): Promise<File>;
-	getAllByUserId(userId: number, filter: FileRepositoryGetAllFileFilter): Promise<File[]>;
+	getAllByUserId(userId: string, filter: FileRepositoryGetAllFileFilter): Promise<File[]>;
 	deleteById(fileId: number): Promise<void>;
 	updateById(fileId: number, updatedFile: File): Promise<File>;
 }
@@ -14,7 +14,7 @@ export type FileRepositoryCreateParams = {
 	extension: string;
 	mimeType: string;
 	size: number
-	userId: number;
+	userId: string;
 }
 
 export interface FileRepositoryGetAllFileFilter {

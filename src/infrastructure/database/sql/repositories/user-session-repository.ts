@@ -42,7 +42,7 @@ export class UserSessionRepositoryImpl implements UserSessionRepository {
 		return this.toEntity(userSession);
 	}
 
-	public async getByUserIdAndDeviceId(userId: number, deviceId: string): Promise<UserSession | null> {
+	public async getByUserIdAndDeviceId(userId: string, deviceId: string): Promise<UserSession | null> {
 		const userSession = await this.database.userSession.findFirst({
 			where: {
 				userId: userId,

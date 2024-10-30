@@ -8,7 +8,7 @@ import { ConfigSymbols, RepositorySymbols } from "../../infrastructure/dependenc
 
 export interface UserService {
 	create(params: UserServiceCreateParams): Promise<User>;
-	getById(userId: number): Promise<User>;
+	getById(userId: string): Promise<User>;
 	comparePassword(inputPassword: string, user: User): Promise<boolean>;
 	updatePassword(params: UserServiceUpdatePasswordParams): Promise<void>;
 }
@@ -16,7 +16,7 @@ export interface UserService {
 export type UserServiceCreateParams = UserRepositoryCreateParams;
 
 export type UserServiceUpdatePasswordParams = {
-	userId: number;
+	userId: string;
 	oldPassword: string;
 	newPassword: string;
 }
@@ -40,7 +40,7 @@ export class UserServiceImpl implements UserService {
 		});
 	}
 
-	public async getById(userId: number): Promise<User> {
+	public async getById(userId: string): Promise<User> {
 		return this.userRepository.getById(userId);
 	}
 
