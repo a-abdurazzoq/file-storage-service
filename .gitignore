@@ -1,4 +1,4 @@
-# Logs
+ц# Logs
 logs
 *.log
 npm-debug.log*
@@ -41,6 +41,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+.idea/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -89,20 +90,11 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/
+build/
 
 # Gatsby files
 .cache/
-# Comment in the public line in if your project uses Gatsby and not Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
-# public
-
-# vuepress build output
-.vuepress/dist
-
-# vuepress v2.x temp and cache directory
-.temp
-.cache
 
 # Docusaurus cache and generated files
 .docusaurus
