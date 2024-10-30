@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "9b64fb41-aebd-4ffb-9627-4c17a42ad11e",
+		"name": "File manager service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "File",
+			"item": [
+				{
+					"name": "Get File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/file/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/file/list",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/file/download/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"download",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Abdurazzoq/Desktop/coming-soon/icons/Instagram_icon.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/file/upload",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Abdurazzoq/Desktop/coming-soon/icons/Telegram_logo.svg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/file/update/7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"update",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/file/delete/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"998331234567\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"998331234567\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signin/new_token",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signin",
+								"new_token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/info",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "refreshToken={{refreshToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTgzMzEyMzQ1NjciLCJkZXZpY2VJZCI6Ijg5NzZkYjc0LTg4ZTgtNDU1OC1iZmUwLWFjMDNlNDcxNTVhYyIsImlhdCI6MTczMDMzMDU5MCwiZXhwIjoxNzMwMzMxMTkwfQ.YefS5H8nm9HxFR3uwXQZZ0b3YtgGF1TWls9v1SR4aZA",
+			"type": "string"
+		},
+		{
+			"key": "refreshToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTgzMzEyMzQ1NjciLCJkZXZpY2VJZCI6Ijg5NzZkYjc0LTg4ZTgtNDU1OC1iZmUwLWFjMDNlNDcxNTVhYyIsImlhdCI6MTczMDMzMDU5MCwiZXhwIjoxNzMwOTM1MzkwfQ.YrQPNmqO4jgFJcqZcUD-y1oaYr2IyJmOcy3Hh5FCfo0",
+			"type": "string"
+		}
+	]
+}
